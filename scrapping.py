@@ -5,7 +5,7 @@ from select import select
 import time
 from unittest import TextTestResult
 from urllib import request
-from gevent import sleep
+#from gevent import sleep
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
@@ -16,6 +16,8 @@ import gettext
 import csv
 import requests
 from bs4 import BeautifulSoup
+from webdriver_manager.chrome import ChromeDriverManager
+
 
 class WebSc : 
     def __init__(self):
@@ -25,7 +27,9 @@ class WebSc :
     options = Options()
     options.add_argument('--headless')
     options.add_argument('--disable-gpu') 
-    driver = webdriver.Chrome(service=Service('Driver/chromedriver.exe'), options=options)
+    #driver = webdriver.Chrome(service=Service('Driver/chromedriver.exe'), options=options)
+    driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+    
     driver.implicitly_wait(10)
     driver.get(url)
     

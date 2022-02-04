@@ -36,7 +36,7 @@ while (t < int(nrp)): #int(nrp)):
     #time.sleep(1)
     #print (t)
     #print (ws.getNrOfPages())
-    if (nrcount == (int(nre) + 1 )):
+    if (nrcount == int(nre)):
             break
     i = 1
     while (i < 51):
@@ -47,7 +47,7 @@ while (t < int(nrp)): #int(nrp)):
         
         lst.append(l)
         i = i + 1
-        if (nrcount == (int(nre) + 1 )):
+        if (nrcount == int(nre)):
             break
         nrcount = nrcount + 1
     t = t + 1
