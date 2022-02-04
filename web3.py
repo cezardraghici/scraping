@@ -9,7 +9,7 @@ from datetime import datetime
 start_time = datetime.now()
 
 ws = WebSc()
-
+ws.setDate()
 ws.putFilter()
 ws.setNrOfEl()
 
@@ -33,6 +33,7 @@ while (t < int(nrp)):
             
         print (nrcount)
         print (i)
+        
         l = ws.getElInfo(i)
         
         lst.append(l)
@@ -40,6 +41,8 @@ while (t < int(nrp)):
         if (nrcount == int(nre)):
             break
         nrcount = nrcount + 1
+        end_time = datetime.now()
+        print('Duration of el: {}'.format(end_time - start_time))
     t = t + 1
     ws.nextPageButton()
     

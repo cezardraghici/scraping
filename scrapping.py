@@ -25,21 +25,34 @@ class WebSc :
     
     url = 'https://e-licitatie.ro/pub/notices/contract-notices/list/2/1'
     options = Options()
-    options.add_argument('--headless')
+    #options.add_argument('--headless')
     options.add_argument('--disable-gpu') 
     #driver = webdriver.Chrome(service=Service('Driver/chromedriver.exe'), options=options)
-    driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     
     driver.implicitly_wait(10)
     driver.get(url)
     
 
     def setDate(self):
+                                                                                                                                    
+        self.driver.execute_script("arguments[0].click();", WebDriverWait(self.driver,20).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[7]/div[2]/ng-transclude/div[1]/div[2]/div[4]/div/div[1]/div[2]/button'))))
+        time.sleep(3)
         
-        self.driver.execute_script("arguments[0].click();", WebDriverWait(self.driver,20).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[7]/div[2]/ng-transclude/div[1]/div[2]/div[4]/div/div[1]/div[2]/button'))))    
-        self.driver.execute_script("arguments[0].click();", WebDriverWait(self.driver,20).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[7]/div[2]/ng-transclude/div[1]/div[2]/div[4]/div/div[1]/div[1]/span/span/span')))) 
-        self.driver.find_element(By.CSS_SELECTOR, 'k-picker-wrap k-state-default k-state-focused k-state-activ k-state-border-down k-state-hover').send_keys('02/01/2022')
-        #
+        self.driver.execute_script("arguments[0].click();", WebDriverWait(self.driver,20).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[7]/div[2]/ng-transclude/div[1]/div[2]/div[4]/div/div[1]/div[1]/span/span/span'))))
+        
+        time.sleep(3)
+        
+        #self.driver.find_element(By.CLASS_NAME,"date-input").send_keys('02/01/2022')
+        #self.driver.find_element(By.CLASS_NAME,"k-picker-wrap k-state-default k-state-hover k-state-focused k-state-active k-state-border-down").send_keys('02/01/2022')
+        self.driver.find_element(By.XPATH,'//*[@id="container-sizing"]/div[7]/div[2]/ng-transclude/div[1]/div[2]/div[4]/div/div[1]/div[1]/span/span/input').send_keys('02/01/2022')
+        
+        #self.driver.find_element(By.XPATH,'//*[@id="container-sizing"]/div[7]/div[2]/ng-transclude/div[1]/div[2]/div[4]/div/div[2]/div[1]/span/span/input').send_keys('02/01/2022')
+        
+        #self.driver.execute_script("arguments[0].click();", WebDriverWait(self.driver,20).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[7]/div[2]/ng-transclude/div[1]/div[2]/div[4]/div/div[1]/div[2]/button'))))    
+        #self.driver.execute_script("arguments[0].click();", WebDriverWait(self.driver,20).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[7]/div[2]/ng-transclude/div[1]/div[2]/div[4]/div/div[1]/div[1]/span/span/span')))) 
+        #self.driver.find_element(By.CSS_SELECTOR, 'k-picker-wrap k-state-default k-state-focused k-state-activ k-state-border-down k-state-hover').send_keys('02/01/2022')
+        time.sleep(20)
         #self.driver.find_element(By.XPATH, '//*[@id="container-sizing"]/div[7]/div[2]/ng-transclude/div[1]/div[2]/div[4]/div/div[1]/div[1]/span/span/input').send_keys('02/01/2022')
         
         
@@ -58,8 +71,14 @@ class WebSc :
             WebDriverWait(self.driver,  20).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[9]/div[2]/div[6]/div/div/span[2]/span/input')))
         except:    
             time.sleep(5)
-        self.driver.find_element(By.XPATH, '//*[@id="container-sizing"]/div[9]/div[2]/div[6]/div/div/span[2]/span/input').send_keys('0')
-        self.driver.find_element(By.XPATH, '//*[@id="container-sizing"]/div[9]/div[2]/div[6]/div/ul/li[1]/a').click()
+        try:
+            self.driver.find_element(By.XPATH, '//*[@id="container-sizing"]/div[9]/div[2]/div[6]/div/div/span[2]/span/input').send_keys('0')
+            self.driver.find_element(By.XPATH, '//*[@id="container-sizing"]/div[9]/div[2]/div[6]/div/ul/li[1]/a').click()
+        except:    
+            time.sleep(5)
+            self.driver.find_element(By.XPATH, '//*[@id="container-sizing"]/div[9]/div[2]/div[6]/div/div/span[2]/span/input').send_keys('0')
+            self.driver.find_element(By.XPATH, '//*[@id="container-sizing"]/div[9]/div[2]/div[6]/div/ul/li[1]/a').click()
+        
     
     def detButton(self, i):
         try:
