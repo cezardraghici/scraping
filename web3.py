@@ -7,22 +7,17 @@ from datetime import datetime
 
 
 start_time = datetime.now()
-# do your work here
 
 ws = WebSc()
-#ws1 = WebSc()
-#time.sleep(5)
-#ws.setDate()
-#time.sleep(20)
+
 ws.putFilter()
 ws.setNrOfEl()
-#ws1.putFilter()
+
 
 nrp = ws.getNrOfPages()
 nre = ws.getNrOfElements()
 
-#nrp1 = ws.getNrOfPages()
-#nre1 = ws.getNrOfElements()
+
 
 
 t = 0
@@ -32,11 +27,9 @@ nrcount = 1
 
 print (nrp)
 print (nre)
-while (t < int(nrp)): #int(nrp)):
-    #time.sleep(1)
-    #print (t)
-    #print (ws.getNrOfPages())
-    if (nrcount == (int(nre) + 1 )):
+while (t < int(nrp)): 
+    
+    if (nrcount == int(nre)):
             break
     i = 1
     while (i < 51):
@@ -47,7 +40,7 @@ while (t < int(nrp)): #int(nrp)):
         
         lst.append(l)
         i = i + 1
-        if (nrcount == (int(nre) + 1 )):
+        if (nrcount == int(nre)):
             break
         nrcount = nrcount + 1
     t = t + 1
@@ -64,16 +57,11 @@ with open('Files/date2.csv',  'w', encoding="utf-8") as f:
     writer.writerow(header)
     while (n<int(nre)):
         x=0
-        writer.writerow(lst[n])
-        '''
-        while (x < 5):
-            writer.writerow(lst[n][x])
-            x = x + 1
-        '''    
+        writer.writerow(lst[n])   
         n = n+1
 
 f.close()
- 
+ws.drvClose()
 
         
         

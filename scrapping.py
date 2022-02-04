@@ -32,8 +32,8 @@ class WebSc :
 
     def setDate(self):
         
-        self.driver.execute_script("arguments[0].click();", WebDriverWait(self.driver,10).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[7]/div[2]/ng-transclude/div[1]/div[2]/div[4]/div/div[1]/div[2]/button'))))    
-        self.driver.execute_script("arguments[0].click();", WebDriverWait(self.driver,10).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[7]/div[2]/ng-transclude/div[1]/div[2]/div[4]/div/div[1]/div[1]/span/span/span')))) 
+        self.driver.execute_script("arguments[0].click();", WebDriverWait(self.driver,20).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[7]/div[2]/ng-transclude/div[1]/div[2]/div[4]/div/div[1]/div[2]/button'))))    
+        self.driver.execute_script("arguments[0].click();", WebDriverWait(self.driver,20).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[7]/div[2]/ng-transclude/div[1]/div[2]/div[4]/div/div[1]/div[1]/span/span/span')))) 
         self.driver.find_element(By.CSS_SELECTOR, 'k-picker-wrap k-state-default k-state-focused k-state-activ k-state-border-down k-state-hover').send_keys('02/01/2022')
         #
         #self.driver.find_element(By.XPATH, '//*[@id="container-sizing"]/div[7]/div[2]/ng-transclude/div[1]/div[2]/div[4]/div/div[1]/div[1]/span/span/input').send_keys('02/01/2022')
@@ -42,11 +42,11 @@ class WebSc :
         
     def putFilter(self):
         
-        self.driver.execute_script("arguments[0].click();", WebDriverWait(self.driver,10).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[7]/div[2]/ng-transclude/div[1]/div[1]/div[1]/h4/input'))))
-        self.driver.execute_script("arguments[0].click();", WebDriverWait(self.driver,10).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[7]/div[2]/ng-transclude/div[1]/div[1]/div[3]/h4/input'))))
-        self.driver.execute_script("arguments[0].click();", WebDriverWait(self.driver,10).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[7]/div[2]/ng-transclude/div[1]/div[1]/div[4]/h4/input'))))
-        self.driver.execute_script("arguments[0].click();", WebDriverWait(self.driver,10).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[7]/div[2]/ng-transclude/div[1]/div[1]/div[5]/h4/input'))))
-        self.driver.execute_script("arguments[0].click();", WebDriverWait(self.driver,10).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[7]/div[2]/ng-transclude/div[1]/div[1]/div[6]/h4/input'))))
+        self.driver.execute_script("arguments[0].click();", WebDriverWait(self.driver,20).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[7]/div[2]/ng-transclude/div[1]/div[1]/div[1]/h4/input'))))
+        self.driver.execute_script("arguments[0].click();", WebDriverWait(self.driver,20).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[7]/div[2]/ng-transclude/div[1]/div[1]/div[3]/h4/input'))))
+        self.driver.execute_script("arguments[0].click();", WebDriverWait(self.driver,20).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[7]/div[2]/ng-transclude/div[1]/div[1]/div[4]/h4/input'))))
+        self.driver.execute_script("arguments[0].click();", WebDriverWait(self.driver,20).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[7]/div[2]/ng-transclude/div[1]/div[1]/div[5]/h4/input'))))
+        self.driver.execute_script("arguments[0].click();", WebDriverWait(self.driver,20).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[7]/div[2]/ng-transclude/div[1]/div[1]/div[6]/h4/input'))))
         self.driver.execute_script("arguments[0].click();", WebDriverWait(self.driver,20).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="THE-SEARCH-BUTTON"]'))))
     
     def setNrOfEl(self):
@@ -56,28 +56,34 @@ class WebSc :
         self.driver.find_element(By.XPATH, '//*[@id="container-sizing"]/div[9]/div[2]/div[6]/div/ul/li[1]/a').click()
     
     def detButton(self, i):
-        
-        self.driver.execute_script("arguments[0].click();", WebDriverWait(self.driver,20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="container-sizing"]/div[9]/div[2]/div[' + str(i) + ']/div/div/div[2]/h2/a'))))
+        try:
+            self.driver.execute_script("arguments[0].click();", WebDriverWait(self.driver,20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="container-sizing"]/div[9]/div[2]/div[' + str(i) + ']/div/div/div[2]/h2/a'))))
+        except:
+            time.sleep(5)
+            self.driver.execute_script("arguments[0].click();", WebDriverWait(self.driver,20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="container-sizing"]/div[9]/div[2]/div[' + str(i) + ']/div/div/div[2]/h2/a'))))
         
     def backButton(self):
-        
-        self.driver.execute_script("arguments[0].click();", WebDriverWait(self.driver,20).until(EC.element_to_be_clickable((By.XPATH,'/html/body/div[1]/div/div[2]/div/div[4]/div/div/button[4]'))))
+        try:
+            self.driver.execute_script("arguments[0].click();", WebDriverWait(self.driver,20).until(EC.element_to_be_clickable((By.XPATH,'/html/body/div[1]/div/div[2]/div/div[4]/div/div/button[4]'))))
+        except:
+            time.sleep(5)
+            self.driver.execute_script("arguments[0].click();", WebDriverWait(self.driver,20).until(EC.element_to_be_clickable((By.XPATH,'/html/body/div[1]/div/div[2]/div/div[4]/div/div/button[4]'))))
     
     def nextPageButton(self):
-        
-        self.driver.execute_script("arguments[0].click();", WebDriverWait(self.driver,20).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[9]/div[2]/div[51]/div/ul/li[4]/a'))))
+        try:
+            self.driver.execute_script("arguments[0].click();", WebDriverWait(self.driver,20).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[9]/div[2]/div[51]/div/ul/li[4]/a'))))
+        except:
+            time.sleep(5)
+            self.driver.execute_script("arguments[0].click();", WebDriverWait(self.driver,20).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[9]/div[2]/div[51]/div/ul/li[4]/a'))))
     
     def verifyIfExist(self, path):
         ver = self.driver.find_element(By.XPATH, path).is_enabled()
         return ver
         
     def getElInfo(self, i):
-        nrel = 0
-        #listaDate=[]
-        #i=1
+        
         wait = WebDriverWait(self.driver,  20)
-        #while (i < 50): 
-            
+      
         start_time = datetime.now()
         try:
             wait.until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[9]/div[2]/div[' + str(i) + ']/div/div/div[1]/div[1]/strong')))
@@ -230,29 +236,26 @@ class WebSc :
         print('Duration: {}'.format(end_time - start_time))
         
         try:    
-            ts=wait.until(EC.element_to_be_clickable((By.XPATH,'//*[@id="section-4"]/div[2]'))).text
+            ts=self.driver.find_element(By.XPATH,'//*[@id="section-4"]/div[2]').text
         except:
             ts='-'
         
-        
-        print(nrel)    
-        nrel = nrel + 1
         informatii = [id , data, tipP, tipC, stare, modDes, modAT, cpv, aut, datalim, suma, des, ts]
-        #listaDate.append(informatii)
-        
         i = i + 1
+        
         self.backButton()  
+        
         return informatii       
 
     def getNrOfPages(self):
        
-        WebDriverWait(self.driver, timeout=10).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[9]/div[2]/div[51]/div/ul/li[3]/a')))
+        WebDriverWait(self.driver, timeout=20).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[9]/div[2]/div[51]/div/ul/li[3]/a')))
         nr = self.driver.find_element(By.XPATH, '//*[@id="container-sizing"]/div[9]/div[2]/div[51]/div/ul/li[3]/a').text[5:]
         return nr
         
     def getNrOfElements(self):
         
-        WebDriverWait(self.driver, timeout=10).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[9]/div[2]/div[51]/div/div/span[4]')))
+        WebDriverWait(self.driver, timeout=20).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[9]/div[2]/div[51]/div/div/span[4]')))
         nr2 = self.driver.find_element(By.XPATH, '//*[@id="container-sizing"]/div[9]/div[2]/div[51]/div/div/span[4]').text
         return nr2
    
