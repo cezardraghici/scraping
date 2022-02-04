@@ -5,7 +5,7 @@ from select import select
 import time
 from unittest import TextTestResult
 from urllib import request
-from gevent import sleep
+#from gevent import sleep
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
@@ -16,6 +16,8 @@ import gettext
 import csv
 import requests
 from bs4 import BeautifulSoup
+from webdriver_manager.chrome import ChromeDriverManager
+
 
 class WebSc : 
     def __init__(self):
@@ -25,7 +27,9 @@ class WebSc :
     options = Options()
     options.add_argument('--headless')
     options.add_argument('--disable-gpu') 
-    driver = webdriver.Chrome(service=Service('Driver/chromedriver.exe'), options=options)
+    #driver = webdriver.Chrome(service=Service('Driver/chromedriver.exe'), options=options)
+    driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+    
     driver.implicitly_wait(10)
     driver.get(url)
     
@@ -50,8 +54,10 @@ class WebSc :
         self.driver.execute_script("arguments[0].click();", WebDriverWait(self.driver,20).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="THE-SEARCH-BUTTON"]'))))
     
     def setNrOfEl(self):
-        #WebDriverWait(self.driver,  20).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[9]/div[2]/div[6]/div/div/span[2]/span/input')))
-        time.sleep(2)
+        try:
+            WebDriverWait(self.driver,  20).until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[9]/div[2]/div[6]/div/div/span[2]/span/input')))
+        except:    
+            time.sleep(5)
         self.driver.find_element(By.XPATH, '//*[@id="container-sizing"]/div[9]/div[2]/div[6]/div/div/span[2]/span/input').send_keys('0')
         self.driver.find_element(By.XPATH, '//*[@id="container-sizing"]/div[9]/div[2]/div[6]/div/ul/li[1]/a').click()
     
@@ -98,6 +104,7 @@ class WebSc :
         except:
             id = '-'
         print (id)    
+        
         start_time = datetime.now()
         try:
             wait.until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[9]/div[2]/div[' + str(i) + ']/div/div/div[1]/div[2]')))
@@ -105,10 +112,12 @@ class WebSc :
             time.sleep(5)
         end_time = datetime.now()
         print('Duration: {}'.format(end_time - start_time))
+        
         try:
             data = self.driver.find_element(By.XPATH,'//*[@id="container-sizing"]/div[9]/div[2]/div[' + str(i) + ']/div/div/div[1]/div[2]').text
         except:
             data = '-'
+            
         start_time = datetime.now()
         try:
             wait.until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[9]/div[2]/div[' + str(i) + ']/div/div/div[2]/div/div[1]/strong[1]')))
@@ -116,10 +125,12 @@ class WebSc :
             time.sleep(5)
         end_time = datetime.now()
         print('Duration: {}'.format(end_time - start_time))
+        
         try:
             tipP = self.driver.find_element(By.XPATH,'//*[@id="container-sizing"]/div[9]/div[2]/div[' + str(i) + ']/div/div/div[2]/div/div[1]/strong[1]').text
         except:
             tipP = '-'
+            
         start_time = datetime.now()
         try:
             wait.until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[9]/div[2]/div[' + str(i) + ']/div/div/div[2]/div/div[1]/strong[2]')))
@@ -127,10 +138,12 @@ class WebSc :
             time.sleep(5)
         end_time = datetime.now()
         print('Duration: {}'.format(end_time - start_time))
+        
         try:
             tipC = self.driver.find_element(By.XPATH,'//*[@id="container-sizing"]/div[9]/div[2]/div[' + str(i) + ']/div/div/div[2]/div/div[1]/strong[2]').text
         except:
             tipC = '-'
+            
         start_time = datetime.now()
         try:
             wait.until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[9]/div[2]/div[' + str(i) + ']/div/div/div[2]/div/div[1]/strong[3]')))
@@ -138,10 +151,12 @@ class WebSc :
             time.sleep(5)
         end_time = datetime.now()
         print('Duration: {}'.format(end_time - start_time))
+        
         try:
             stare = self.driver.find_element(By.XPATH,'//*[@id="container-sizing"]/div[9]/div[2]/div[' + str(i) + ']/div/div/div[2]/div/div[1]/strong[3]').text
         except:
             stare = '-'
+            
         start_time = datetime.now()
         try:
             wait.until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[9]/div[2]/div[' + str(i) + ']/div/div/div[2]/div/div[1]/strong[4]')))
@@ -149,10 +164,12 @@ class WebSc :
             time.sleep(5)
         end_time = datetime.now()
         print('Duration: {}'.format(end_time - start_time))
+        
         try:
             modDes = self.driver.find_element(By.XPATH,'//*[@id="container-sizing"]/div[9]/div[2]/div[' + str(i) + ']/div/div/div[2]/div/div[1]/strong[4]').text
         except:
             modDes = '-'
+            
         start_time = datetime.now()
         try:
             wait.until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[9]/div[2]/div[' + str(i) + ']/div/div/div[2]/div/div[2]/strong[1]')))
@@ -160,17 +177,20 @@ class WebSc :
             time.sleep(5)
         end_time = datetime.now()
         print('Duration: {}'.format(end_time - start_time))
+        
         try:
             modAT = self.driver.find_element(By.XPATH,'//*[@id="container-sizing"]/div[9]/div[2]/div[' + str(i) + ']/div/div/div[2]/div/div[2]/strong[1]').text
         except:
             modAT = '-'
+            
         start_time = datetime.now()
         try:
             wait.until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[9]/div[2]/div[' + str(i) + ']/div/div/div[2]/div/div[2]/strong[2]')))
         except:
             time.sleep(5)
         end_time = datetime.now()
-        print('Duration: {}'.format(end_time - start_time))                                                
+        print('Duration: {}'.format(end_time - start_time))   
+                                                     
         try:
             cpv = self.driver.find_element(By.XPATH,'//*[@id="container-sizing"]/div[9]/div[2]/div[' + str(i) + ']/div/div/div[2]/div/div[2]/strong[2]').text
         except:
@@ -188,7 +208,7 @@ class WebSc :
             aut =  self.driver.find_element(By.XPATH,'//*[@id="container-sizing"]/div[9]/div[2]/div[' + str(i) + ']/div/div/div[2]/div/div[2]/div/strong').text
         except:
             aut = '-'
-        print ( aut)
+        
         start_time = datetime.now()
         try:
             wait.until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[9]/div[2]/div[' + str(i) + ']/div/div/div[2]/div/div[3]/strong')))
@@ -196,10 +216,12 @@ class WebSc :
             time.sleep(5)
         end_time = datetime.now()
         print('Duration: {}'.format(end_time - start_time))
+        
         try:
             datalim = self.driver.find_element(By.XPATH,'//*[@id="container-sizing"]/div[9]/div[2]/div[' + str(i) + ']/div/div/div[2]/div/div[3]/strong').text
         except:
             datalim = '-'
+            
         start_time = datetime.now()
         try:
             wait.until(EC.element_to_be_clickable((By.XPATH,'//*[@id="container-sizing"]/div[9]/div[2]/div[' + str(i) + ']/div/div/div[3]/div[1]')))
@@ -207,6 +229,7 @@ class WebSc :
             time.sleep(5)
         end_time = datetime.now()
         print('Duration: {}'.format(end_time - start_time))
+        
         try:    
             suma = self.driver.find_element(By.XPATH,'//*[@id="container-sizing"]/div[9]/div[2]/div[' + str(i) + ']/div/div/div[3]/div[1]').text
         except:
@@ -228,6 +251,7 @@ class WebSc :
         except:
             des='-'
         start_time = datetime.now()
+        
         try:
             wait.until(EC.element_to_be_clickable((By.XPATH,'//*[@id="section-4"]/div[2]')))
         except:

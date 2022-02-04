@@ -13,11 +13,8 @@ ws = WebSc()
 ws.putFilter()
 ws.setNrOfEl()
 
-
 nrp = ws.getNrOfPages()
 nre = ws.getNrOfElements()
-
-
 
 
 t = 0
@@ -28,7 +25,7 @@ nrcount = 1
 print (nrp)
 print (nre)
 while (t < int(nrp)): 
-    
+
     if (nrcount == int(nre)):
             break
     i = 1
@@ -57,7 +54,9 @@ with open('Files/date2.csv',  'w', encoding="utf-8") as f:
     writer.writerow(header)
     while (n<int(nre)):
         x=0
+
         writer.writerow(lst[n])   
+  
         n = n+1
 
 f.close()
